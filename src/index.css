@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(222, 217, 255, 0.75), transparent 38%),
+    radial-gradient(ellipse at 90% 90%, rgba(218, 239, 232, 0.75), transparent 34%),
+    #f7f6fb;
+  color: #242139;
+  font-family:
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
