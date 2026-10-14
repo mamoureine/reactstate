@@ -1,6 +1,6 @@
-# Personal Profile
+# CineScope
 
-A Create React App project demonstrating a class-based React component, component state, conditional rendering, and a lifecycle timer.
+A Create React App movie catalog with featured films, descriptions, and embedded trailers. Selecting a movie card opens its detail view; use **Back to all movies** or the CineScope logo to return to the home page. View changes are managed with component state so a routing library can be introduced in a later checkpoint.
 
 ## Getting started
 
@@ -10,8 +10,6 @@ Install dependencies and start the development server:
 npm install
 npm start
 ```
-
-Use **Show profile** to reveal the profile and **Hide profile** to close it. The elapsed-time display is updated by an interval started in `componentDidMount` and cleared in `componentWillUnmount`.
 
 ## Available scripts
 

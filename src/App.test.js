@@ -1,38 +1,39 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-afterEach(() => {
-  jest.useRealTimers();
-});
-
-test('shows and hides the profile when the button is toggled', () => {
+test('shows the featured movie collection on the home page', () => {
   render(<App />);
 
-  expect(screen.queryByRole('heading', { name: 'Alex Morgan' })).toBeNull();
-  expect(screen.getByText('Time since this component mounted')).toBeInTheDocument();
-
-  fireEvent.click(screen.getByRole('button', { name: /show profile/i }));
-
-  expect(screen.getByRole('heading', { name: 'Alex Morgan' })).toBeInTheDocument();
-  expect(screen.getByText('Product Designer')).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /hide profile/i })).toHaveAttribute(
-    'aria-expanded',
-    'true'
-  );
-
-  fireEvent.click(screen.getByRole('button', { name: /hide profile/i }));
-  expect(screen.queryByRole('heading', { name: 'Alex Morgan' })).toBeNull();
+  expect(
+    screen.getByRole('heading', { name: 'Stories worth staying in for.' })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: 'View Inception details' })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: 'View Interstellar details' })
+  ).toBeInTheDocument();
 });
 
-test('updates the elapsed time using its mount interval', () => {
-  jest.useFakeTimers();
+test('opens a movie description and trailer, then navigates back home', () => {
   render(<App />);
 
-  expect(screen.getByText('0m 00s')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'View Inception details' }));
 
-  act(() => {
-    jest.advanceTimersByTime(3000);
-  });
+  expect(screen.getByRole('heading', { name: 'Inception' })).toBeInTheDocument();
+  expect(
+    screen.getByText(/A skilled thief who steals secrets through dream-sharing/)
+  ).toBeInTheDocument();
+  expect(
+    screen.getByTitle('Inception trailer').getAttribute('src')
+  ).toBe('https://www.youtube-nocookie.com/embed/YoHD9XEInc0');
 
-  expect(screen.getByText('0m 03s')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: /back to all movies/i }));
+
+  expect(
+    screen.getByRole('heading', { name: 'Stories worth staying in for.' })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: 'View Inception details' })
+  ).toBeInTheDocument();
 });
